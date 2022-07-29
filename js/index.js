@@ -20,6 +20,8 @@ const karina = new Cliente("Karina", "46");
 const franco = new Cliente("Franco", "18");
 const pablo = new Cliente("Pablo", "44");
 
+const clientes = ["karina", "mauro", "franco", "pablo"];
+
 
 
 
@@ -32,9 +34,14 @@ function despejar(){
     primerParrafo.remove();
     segundoParrafo.remove();
     botonInicial.remove();
-    let formulario = document.createElement("form");
-    formulario.innerHTML = "<form id = nombre><input type=text><input type=submit value=Enviar></form>";
     let padreDiv = document.getElementById("padreDiv");
+    let saludoInicial = document.createElement("p");
+    saludoInicial.innerText = "Ingrese su nombre por favor... (debe ser cliente del banco)"
+    padreDiv.append(saludoInicial);
+
+    let formulario = document.createElement("form");
+    formulario.innerHTML = "<form><input type=text><input type=submit value=Enviar></form>";
+    formulario.id = "formu";
     padreDiv.append(formulario);
     // let input1 = document.getElementById("nombre");
     // input1.addEventListener("input", () => {
@@ -42,18 +49,45 @@ function despejar(){
     //     entrada.innerText = "Hola " + input1.value;
     //     padreDiv.append(entrada);
     // })
-    let input1 = document.getElementById("nombre");
-    input1.addEventListener("submit", validar);
-    function validar(e){
+    let input = document.getElementById("formu");
+    console.log(input);
+    input.addEventListener("submit", validarFormulario);
+
+    function validarFormulario(e){
         e.preventDefault();
         // let entradita = document.createElement("p");
-        // entrada.innerText = "Hola " + e.target.value;
+        // entradita.innerText = "Hola " + e.target.children[0].value;
         // padreDiv.append(entradita);
-        console.log("hola");
+        const clientes = ["karina", "mauro", "franco", "pablo"];
+        if(clientes.includes(e.target.children[0].value)){
+            let entradita = document.createElement("p");
+            entradita.innerText = "Hola " + e.target.children[0].value;
+            padreDiv.append(entradita);
+        }else{
+            let entradita = document.createElement("p");
+            entradita.innerText = "No eres un cliente del banco";
+            padreDiv.append(entradita);
+        }
         
     }
-
 }
+
+let botonContinuar = document.createElement("button");
+botonContinuar.innerText = "Continuar" ;
+botonContinuar.id = "botonContinuar";
+padreDiv.append(botonContinuar);
+
+let parrafos = document.getElementsByTagName("p");
+let botonContinuar2 = document.getElementById("botonContinuar");
+// let botonContinuar2 = document.getElementById("botonContinuar");
+botonContinuar2.addEventListener("click", respuestaClick)
+function respuestaClick(){
+    console.log("hoilaaaa");
+    parrafos.remove();
+}
+
+
+
 
 // Definimos una variable con el nombre del usuario
 
@@ -61,21 +95,37 @@ function despejar(){
 
 // Creamos un array con los clientes del banco
 
-const clientes = ["karina", "mauro", "franco", "pablo"];
+// const clientes = ["karina", "mauro", "franco", "pablo"];
 
 // Armamos un while para comprobar que el nombre del usuario coincida con algun cliente ya registrado del banco
 
-while(clientes.includes(entrada) == false){
-    console.log("No eres un cliente del banco");
-    entrada = prompt("Ingrese su nombre por favor... (debe ser cliente del banco)");
-}
 
-console.log("Bienvenid@ " + entrada + " !!");
+
+
+
+
+
+
+// while(clientes.includes(entrada) == false){
+//     console.log("No eres un cliente del banco");
+//     entrada = prompt("Ingrese su nombre por favor... (debe ser cliente del banco)");
+// }
+
+// console.log("Bienvenid@ " + entrada + " !!");
+
+
+
+
+
+
+
+
+
 
 
 // Asignamos las dos variables principales interactuando con el usuario
 
-let monto = parseInt(prompt("Ingrese el monto que necesita:"));
+// let monto = parseInt(prompt("Ingrese el monto que necesita:")); --------------------------------------
 
 // Armamos una funcion para sumarle el interes cobrado por el banco al monto requerido
 
@@ -93,7 +143,7 @@ console.log("La tasa de interés es del 36%, por lo que el monto total a abonar 
 
 // Le pedimos al cliente que elija la cantidad de cuotas
 
-let cantidadCuotas = parseInt(prompt("Ingrese cantidad de cuotas (3, 9 o 12)"));
+// let cantidadCuotas = parseInt(prompt("Ingrese cantidad de cuotas (3, 9 o 12)")); ----------------------------------
 
 // Armamos un While para dar solo 3 opciones de cantidad de cuotas
 
@@ -125,7 +175,7 @@ console.log("Muchas gracias por usar nuestros servicios");
 
 // Asignamos una variable con la puntuacion del usuario
 
-let opinion = parseInt(prompt("Puntue el funcionamiento de la herramienta del 1 al 10"));
+// let opinion = parseInt(prompt("Puntue el funcionamiento de la herramienta del 1 al 10")); ------------------------------------------
 
 // Usamos un IF para responder una u otra cosa segun el puntaje
 
