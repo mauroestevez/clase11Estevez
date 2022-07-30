@@ -36,7 +36,7 @@ function despejar(){
     botonInicial.remove();
     let padreDiv = document.getElementById("padreDiv");
     let saludoInicial = document.createElement("p");
-    saludoInicial.innerText = "Ingrese su nombre por favor... (debe ser cliente del banco)"
+    saludoInicial.innerText = "Ingrese su nombre por favor... (debe ser cliente del banco)";
     padreDiv.append(saludoInicial);
 
     let formulario = document.createElement("form");
@@ -63,6 +63,98 @@ function despejar(){
             let entradita = document.createElement("p");
             entradita.innerText = "Hola " + e.target.children[0].value;
             padreDiv.append(entradita);
+            let botonContinuar = document.createElement("button");
+            botonContinuar.innerText = "Continuar" ;
+            botonContinuar.id = "botonContinuar";
+            padreDiv.append(botonContinuar);
+            let parrafos = document.getElementsByClassName("parrafos");
+            let botonContinuar2 = document.getElementById("botonContinuar");
+            // let botonContinuar2 = document.getElementById("botonContinuar");
+            botonContinuar2.addEventListener("click", respuestaClick)
+            function respuestaClick(){
+                    let pedidoMonto = document.createElement("p");
+                    pedidoMonto.innerText = "Ingrese el monto que necesita y presione Enviar:";
+                    padreDiv.append(pedidoMonto);
+                    let formulario2 = document.createElement("form");
+                    formulario2.innerHTML = "<form><input type=text><input type=submit value=Enviar></form>";
+                    formulario2.id = "formu2";
+                    padreDiv.append(formulario2);
+
+                    let input2 = document.getElementById("formu2");
+                    console.log(input2);
+                    input2.addEventListener("submit", validarFormulario2);
+                
+                    function validarFormulario2(e){
+                        e.preventDefault();
+                        function interes (num1) {
+                            return num1 * 1.36;
+                        }
+                        let montoTotal = interes(e.target.children[0].value);
+                        let avisoMonto = document.createElement("p");
+                        avisoMonto.innerText = "La tasa de interés es del 36%, por lo que el monto total a abonar será de " + montoTotal + " pesos";
+                        padreDiv.append(avisoMonto);
+
+
+                        let pedidoCuotas = document.createElement("p");
+                        pedidoCuotas.innerText = "Ingrese cantidad de cuotas (3, 9 o 12)";
+                        padreDiv.append(pedidoCuotas);
+                        let formulario3 = document.createElement("form");
+                        formulario3.innerHTML = "<form><input type=text><input type=submit value=Enviar></form>";
+                        formulario3.id = "formu3";
+                        padreDiv.append(formulario3);
+
+                        let input3 = document.getElementById("formu3");
+                        console.log(input3);
+                        input3.addEventListener("submit", validarFormulario3);
+                
+                        function validarFormulario3(e){
+                                e.preventDefault();
+
+                                if((e.target.children[0].value != 3) && (e.target.children[0].value != 9) && (e.target.children[0].value != 12)){
+                                    let avisoNegativo = document.createElement("p");
+                                    avisoNegativo.innerText = "Cantidad de cuotas no disponible";
+                                    padreDiv.append(avisoNegativo);
+                                }else{
+                                    let avisoPositivo = document.createElement("p");
+                                    avisoPositivo.innerText = "Usted ha seleccionado " + e.target.children[0].value + " cuotas";
+                                    padreDiv.append(avisoPositivo);
+
+                                    function montoCuota (num1, num2) {
+                                            return num1 / num2;
+                                    }  
+                                    let resultado = montoCuota(montoTotal, e.target.children[0].value);
+
+                                    let avisoFinal = document.createElement("p");
+                                    avisoFinal.innerText = "Usted debera pagar " + e.target.children[0].value + " cuotas de " + resultado + " pesos";
+                                    padreDiv.append(avisoFinal);
+
+                                    let saludoFinal = document.createElement("p");
+                                    saludoFinal.innerText = "Muchas gracias por usar nuestros servicios";
+                                    padreDiv.append(saludoFinal);
+                                }
+
+                                
+                                    
+
+                                
+
+
+
+
+                                
+                        // let montoTotal = interes(e.target.children[0].value);
+                        // let avisoMonto = document.createElement("p");
+                        // avisoMonto.innerText = "La tasa de interés es del 36%, por lo que el monto total a abonar será de " + montoTotal + " pesos";
+                        // padreDiv.append(avisoMonto);
+
+
+
+                        }
+
+
+
+                    }
+            }
         }else{
             let entradita = document.createElement("p");
             entradita.innerText = "No eres un cliente del banco";
@@ -72,19 +164,9 @@ function despejar(){
     }
 }
 
-let botonContinuar = document.createElement("button");
-botonContinuar.innerText = "Continuar" ;
-botonContinuar.id = "botonContinuar";
-padreDiv.append(botonContinuar);
 
-let parrafos = document.getElementsByTagName("p");
-let botonContinuar2 = document.getElementById("botonContinuar");
-// let botonContinuar2 = document.getElementById("botonContinuar");
-botonContinuar2.addEventListener("click", respuestaClick)
-function respuestaClick(){
-    console.log("hoilaaaa");
-    parrafos.remove();
-}
+
+
 
 
 
