@@ -24,7 +24,7 @@ const clientes = ["karina", "mauro", "franco", "pablo"];
 
 
 
-
+// Traemos el boton inicial y le ponemos un evento "click". Con él borramos algunos parrafos, le pedimos el nombre al usuario y creamos un form para recibir la respuesta
 
 let botonInicial = document.getElementById("btnInicial")
 botonInicial.addEventListener("click", despejar)
@@ -39,37 +39,34 @@ function despejar(){
     saludoInicial.innerText = "Ingrese su nombre por favor... (debe ser cliente del banco)";
     padreDiv.append(saludoInicial);
 
+    // Con este form evaluamos la respuesta del usuario con un evento "submit". Si es un cliente del banco se lo saluda y si no lo es se le avisa que no es cliente
+
     let formulario = document.createElement("form");
     formulario.innerHTML = "<form><input type=text><input type=submit value=Enviar></form>";
     formulario.id = "formu";
     padreDiv.append(formulario);
-    // let input1 = document.getElementById("nombre");
-    // input1.addEventListener("input", () => {
-    //     let entrada = document.createElement("p");
-    //     entrada.innerText = "Hola " + input1.value;
-    //     padreDiv.append(entrada);
-    // })
+    
     let input = document.getElementById("formu");
     console.log(input);
     input.addEventListener("submit", validarFormulario);
 
     function validarFormulario(e){
         e.preventDefault();
-        // let entradita = document.createElement("p");
-        // entradita.innerText = "Hola " + e.target.children[0].value;
-        // padreDiv.append(entradita);
+        
         const clientes = ["karina", "mauro", "franco", "pablo"];
         if(clientes.includes(e.target.children[0].value)){
             let entradita = document.createElement("p");
             entradita.innerText = "Hola " + e.target.children[0].value;
             padreDiv.append(entradita);
+
+            // Creamos un boton nuevo para continuar y le ponemos un evento "click". Con este evento se le pide al usuario que ingrese el monto con un form
+
             let botonContinuar = document.createElement("button");
             botonContinuar.innerText = "Continuar" ;
             botonContinuar.id = "botonContinuar";
             padreDiv.append(botonContinuar);
-            let parrafos = document.getElementsByClassName("parrafos");
             let botonContinuar2 = document.getElementById("botonContinuar");
-            // let botonContinuar2 = document.getElementById("botonContinuar");
+            
             botonContinuar2.addEventListener("click", respuestaClick)
             function respuestaClick(){
                     let pedidoMonto = document.createElement("p");
@@ -79,6 +76,8 @@ function despejar(){
                     formulario2.innerHTML = "<form><input type=text><input type=submit value=Enviar></form>";
                     formulario2.id = "formu2";
                     padreDiv.append(formulario2);
+
+                    // Armamos un evento "submit" para el form donde se le calcula el interes al monto ingresado por el usuario con una funcion
 
                     let input2 = document.getElementById("formu2");
                     console.log(input2);
@@ -93,6 +92,8 @@ function despejar(){
                         let avisoMonto = document.createElement("p");
                         avisoMonto.innerText = "La tasa de interés es del 36%, por lo que el monto total a abonar será de " + montoTotal + " pesos";
                         padreDiv.append(avisoMonto);
+
+                        // Pedimos las cuotas y las recibimos con un form. Con el hacemos un evento de "submit" y con el analizamos si esa cantidad de cuotas esta disponible
 
 
                         let pedidoCuotas = document.createElement("p");
@@ -119,6 +120,8 @@ function despejar(){
                                     avisoPositivo.innerText = "Usted ha seleccionado " + e.target.children[0].value + " cuotas";
                                     padreDiv.append(avisoPositivo);
 
+                                    // Estando disponible la cantidad de cuotas dividimos el monto total segun las cuotas seleccionadas y le comentamos al usuario cuanto tendra que pagar.
+
                                     function montoCuota (num1, num2) {
                                             return num1 / num2;
                                     }  
@@ -128,31 +131,13 @@ function despejar(){
                                     avisoFinal.innerText = "Usted debera pagar " + e.target.children[0].value + " cuotas de " + resultado + " pesos";
                                     padreDiv.append(avisoFinal);
 
+                                    // Por ultimo le agradecemos al cliente
+
                                     let saludoFinal = document.createElement("p");
                                     saludoFinal.innerText = "Muchas gracias por usar nuestros servicios";
                                     padreDiv.append(saludoFinal);
                                 }
-
-                                
-                                    
-
-                                
-
-
-
-
-                                
-                        // let montoTotal = interes(e.target.children[0].value);
-                        // let avisoMonto = document.createElement("p");
-                        // avisoMonto.innerText = "La tasa de interés es del 36%, por lo que el monto total a abonar será de " + montoTotal + " pesos";
-                        // padreDiv.append(avisoMonto);
-
-
-
                         }
-
-
-
                     }
             }
         }else{
@@ -160,123 +145,5 @@ function despejar(){
             entradita.innerText = "No eres un cliente del banco";
             padreDiv.append(entradita);
         }
-        
     }
 }
-
-
-
-
-
-
-
-
-// Definimos una variable con el nombre del usuario
-
-// let entrada = prompt("Ingrese su nombre por favor... (debe ser cliente del banco)");
-
-// Creamos un array con los clientes del banco
-
-// const clientes = ["karina", "mauro", "franco", "pablo"];
-
-// Armamos un while para comprobar que el nombre del usuario coincida con algun cliente ya registrado del banco
-
-
-
-
-
-
-
-
-// while(clientes.includes(entrada) == false){
-//     console.log("No eres un cliente del banco");
-//     entrada = prompt("Ingrese su nombre por favor... (debe ser cliente del banco)");
-// }
-
-// console.log("Bienvenid@ " + entrada + " !!");
-
-
-
-
-
-
-
-
-
-
-
-// Asignamos las dos variables principales interactuando con el usuario
-
-// let monto = parseInt(prompt("Ingrese el monto que necesita:")); --------------------------------------
-
-// Armamos una funcion para sumarle el interes cobrado por el banco al monto requerido
-
-function interes (num1) {
-    return num1 * 1.36;
-}
-
-// Creamos una variable para el monto final a pagar
-
-let montoTotal = interes(monto);
-
-// Le mostramos al cliente cual es el monto total
-
-console.log("La tasa de interés es del 36%, por lo que el monto total a abonar será de " + montoTotal + " pesos");
-
-// Le pedimos al cliente que elija la cantidad de cuotas
-
-// let cantidadCuotas = parseInt(prompt("Ingrese cantidad de cuotas (3, 9 o 12)")); ----------------------------------
-
-// Armamos un While para dar solo 3 opciones de cantidad de cuotas
-
-while((cantidadCuotas != 3) && (cantidadCuotas != 9) && (cantidadCuotas != 12)){
-    console.log("Cantidad de cuotas no disponible");
-    cantidadCuotas = parseInt(prompt("Ingrese cantidad de cuotas (3, 9 o 12)"));
-}
-
-// Mostramos cuantas cuotas se han seleccionado
-
-console.log("Usted ha seleccionado " + cantidadCuotas + " cuotas");
-
-
-// Designamos una funcion para dividir
-
-function montoCuota (num1, num2) {
-    return num1 / num2;
-}
-
-// Ejecutamos la funcion dentro de una variable
-
-let resultado = montoCuota(monto, cantidadCuotas);
-
-// Mostramos el resultado de la variable
-
-console.log(" Usted debera pagar " + cantidadCuotas + " cuotas de " + resultado + " pesos");
-
-console.log("Muchas gracias por usar nuestros servicios");
-
-// Asignamos una variable con la puntuacion del usuario
-
-// let opinion = parseInt(prompt("Puntue el funcionamiento de la herramienta del 1 al 10")); ------------------------------------------
-
-// Usamos un IF para responder una u otra cosa segun el puntaje
-
-if(opinion == 10){
-    console.log("Muchas gracias !!!!!");
-}
-else{
-    console.log("Seguiremos trabajando, gracias por puntuar");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
